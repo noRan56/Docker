@@ -14,10 +14,13 @@ jobs:
     
 
     steps: 
-       - name : 'BeFore'
-         run: ls
-
        - uses: actions/checkout@v3
        
-       - name: 'After'
-         run: ls -a 
+       - name: 'Login To Docker hub'
+         run: docker login --username ${{secrets.DOCKER_NAME}}  --password ${{secrets.DOKER_TOKEN}}  
+         
+       - name: "Building docker image " 
+         run: docker build -t   ${{secrets.DOCKER_NAME}}/myimage .
+
+       - name: "Push to Docker hub"  
+         run: docker push  ${{secrets.DOCKER_NAME}}/myimage
