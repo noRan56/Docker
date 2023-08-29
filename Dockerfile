@@ -1,7 +1,8 @@
 FROM node:14
 
-COPY . /form
 WORKDIR /form
+COPY . /form
 
+RUN npm install
 CMD node main.js
 
